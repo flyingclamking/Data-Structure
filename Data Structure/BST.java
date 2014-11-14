@@ -303,7 +303,7 @@ public class BST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 	
 	
 	/***********************************************************************
-	    *  Iterator.
+	    *  Inorder Iterator.
 	***********************************************************************/
 	public Iterator<Key> iterator() {
 		return new InorderIterator();
@@ -311,7 +311,7 @@ public class BST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 	
 	private class InorderIterator implements Iterator<Key> {
 		
-		Deque<Node> stack = new ArrayDeque<Node>();
+		private Deque<Node> stack = new ArrayDeque<Node>();
 		
 		private void pushLeft(Node x) {
 			while (x != null) {
@@ -337,6 +337,102 @@ public class BST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 	
 	
 	/***********************************************************************
+	    *  Preorder Iterator.
+	***********************************************************************/
+	public Iterator<Key> preorderIterator() {
+		return new PreorderIterator();
+	}
+	
+	private class PreorderIterator implements Iterator<Key> {
+		
+		private Deque<Node> stack = new ArrayDeque<Node>();
+		
+		public PreorderIterator() {
+			if (root != null) {
+				stack.push(root);
+			}
+		}
+
+		public boolean hasNext() {
+			return !stack.isEmpty();
+		}
+
+		public Key next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			Node result = stack.pop();
+			if (result.right != null) {
+				stack.push(result.right);
+			}
+			if (result.left != null) {
+				stack.push(result.left);
+			}
+			return result.key;
+		}
+		
+	}
+	
+	
+	/***********************************************************************
+	    *  Postorder Iterator.
+	***********************************************************************/
+	public Iterator<Key> postorderIterator() {
+		return new PostorderIterator();
+	}
+	
+	private class PostorderIterator implements Iterator<Key> {
+		
+		private Deque<Node> stack = new ArrayDeque<Node>();
+		private Node prev;
+		private Node curr;
+		
+		public PostorderIterator() {
+			prev = null;
+			curr = null;
+			if (root != null) {
+				stack.push(root);
+			}
+		}
+
+		public boolean hasNext() {
+			return !stack.isEmpty();
+		}
+
+		public Key next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			Key result = null;
+			while (result == null) {
+				curr = stack.peek();
+				if (prev == null || prev.left == curr || prev.right == curr) {
+					if (curr.left != null) {
+						stack.push(curr.left);
+					} else if (curr.right != null) {
+						stack.push(curr.right);
+					} else {
+						result = stack.pop().key;
+					}
+				} else if (curr.left == prev) {
+					if (curr.right != null) {
+						stack.push(curr.right);
+					} else {
+						result = stack.pop().key;
+					}
+				} else {
+					result = stack.pop().key;
+				}
+				prev = curr;
+			}
+			
+			return result;
+		}
+		
+	}
+	
+	
+	/***********************************************************************
 	    *  Node class.
 	***********************************************************************/
 	private class Node {
@@ -354,4 +450,5 @@ public class BST<Key extends Comparable<Key>, Value> implements Iterable<Key> {
 			right = null;
 		}
 	}
+	
 }
