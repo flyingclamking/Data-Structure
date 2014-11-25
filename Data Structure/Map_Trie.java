@@ -22,9 +22,9 @@ public class Map_Trie<Value> {
 	
 	
 	/**
-     * Returns the value associated with the given key.
-     * @throws NullPointerException if key is null
-     */
+     	* Returns the value associated with the given key.
+     	* @throws NullPointerException if key is null
+     	*/
 	@SuppressWarnings("unchecked")
 	public Value get(String key) {
 		if (key == null) {
@@ -53,12 +53,12 @@ public class Map_Trie<Value> {
 	
 	
 	
-	 /**
-     * Inserts the key-value pair into the symbol table, overwriting the old value
-     * with the new value if the key is already in the symbol table.
-     * If the value is null, this effectively deletes the key from the symbol table.
-     * @throws NullPointerException if key is null
-     */
+	/**
+	* Inserts the key-value pair into the symbol table, overwriting the old value
+	* with the new value if the key is already in the symbol table.
+     	* If the value is null, this effectively deletes the key from the symbol table.
+     	* @throws NullPointerException if key is null
+	*/
 	public void put(String key, Value v) {
 		if (key == null) {
 			throw new NullPointerException();
@@ -86,9 +86,9 @@ public class Map_Trie<Value> {
 	
 	
 	/**
-     * Does this symbol table contain the given key?
-     * @throws NullPointerException if key is null
-     */
+     	* Does this symbol table contain the given key?
+     	* @throws NullPointerException if key is null
+     	*/
 	public boolean contains(String key) {
 		if (key == null) {
 			throw new NullPointerException();
@@ -98,20 +98,20 @@ public class Map_Trie<Value> {
 	
 	
 	
-    /**
-     * Returns the number of key-value pairs in this symbol table.
-     * @return the number of key-value pairs in this symbol table
-     */
+    	/**
+     	* Returns the number of key-value pairs in this symbol table.
+     	* @return the number of key-value pairs in this symbol table
+     	*/
 	public int size() {
 		return size;
 	}
 
 	
 	
-    /**
-     * Is this symbol table empty?
-     * @return true if this symbol table is empty and false otherwise
-     */
+    	/**
+     	* Is this symbol table empty?
+     	* @return true if this symbol table is empty and false otherwise
+     	*/
 	public boolean isEmpty() {
 		return size == 0;
 	}
@@ -119,21 +119,21 @@ public class Map_Trie<Value> {
 	
 	
 	/**
-     * Returns all keys in the symbol table as an Iterable.
-     * To iterate over all of the keys in the symbol table named st,
-     * use the foreach notation: for (Key key : st.keys()).
-     * @return all keys in the sybol table as an Iterable
-     */
+     	* Returns all keys in the symbol table as an Iterable.
+     	* To iterate over all of the keys in the symbol table named st,
+     	* use the foreach notation: for (Key key : st.keys()).
+     	* @return all keys in the sybol table as an Iterable
+     	*/
 	public Iterable<String> keys() {
 		return keysWithPrefix("");
 	}
 	
 	
-	 /**
-	 * Backtracking Algorithm
-     * Returns all of the keys in the set that start with prefix.
-     * @return all of the keys in the set that start with prefix, as an iterable
-     */
+	/**
+	* Backtracking Algorithm
+     	* Returns all of the keys in the set that start with prefix.
+     	* @return all of the keys in the set that start with prefix, as an iterable
+     	*/
 	public Iterable<String> keysWithPrefix(String prefix) {
 		List<String> result = new ArrayList<String>();
 		TrieNode node = get(root, prefix, 0);
@@ -159,13 +159,13 @@ public class Map_Trie<Value> {
 	
 	
 	
-	 /**
-     * Returns the string in the symbol table that is the longest prefix of query,
-     * or null, if no such string.
-     * @throws NullPointerException if query is null
-     * @return the string in the symbol table that is the longest prefix of query,
-     *     or null if no such string
-     */
+	/**
+     	* Returns the string in the symbol table that is the longest prefix of query,
+     	* or null, if no such string.
+     	* @throws NullPointerException if query is null
+     	* @return the string in the symbol table that is the longest prefix of query,
+     	*     or null if no such string
+     	*/
 	public String longestPrefixOf(String s) {
 		if (s == null) {
 			throw new NullPointerException();
@@ -193,10 +193,10 @@ public class Map_Trie<Value> {
 	
 	
 	
-	 /**
-     * Removes the key from the set if the key is present.
-     * @throws NullPointerException if key is null
-     */
+	/**
+     	* Removes the key from the set if the key is present.
+     	* @throws NullPointerException if key is null
+     	*/
 	public void delete(String key) {
 		if (key == null) {
 			throw new NullPointerException();
